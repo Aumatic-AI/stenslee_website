@@ -5,8 +5,9 @@ import Lenis from "lenis";
 
 type MotionWindow = Window & { __motion?: boolean; __lenis?: Lenis };
 
-// Page-wide motion: smooth scrolling, scroll reveals, the steps' numeral
-// fill, and the 3D tilt on the large feature card. Renders nothing.
+// Page-wide motion: smooth scrolling, scroll reveals (which also start the
+// feature visuals, counters and step lines), and the 3D tilt on the large
+// feature card. Renders nothing.
 export default function Motion() {
   useEffect(() => {
     const win = window as MotionWindow;
@@ -38,26 +39,6 @@ export default function Motion() {
       .querySelectorAll("[data-reveal], [data-stagger], [data-play], [data-letter-host]")
       .forEach((el) => revealIO.observe(el));
     cleanups.push(() => revealIO.disconnect());
-
-    // Steps: a numeral fills in once its row crosses the middle of the screen
-    // (along with every step before it, in case a fast scroll skipped one);
-    // the row currently in the middle is picked out in gold.
-    const steps = Array.from(document.querySelectorAll<HTMLElement>("[data-step]"));
-    const stepIO = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const reached = steps.indexOf(entry.target as HTMLElement);
-          steps.forEach((s, i) => {
-            if (i <= reached) s.classList.add("is-active");
-            s.classList.toggle("is-current", i === reached);
-          });
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    steps.forEach((s) => stepIO.observe(s));
-    cleanups.push(() => stepIO.disconnect());
 
     // Gentle 3D tilt that follows the pointer (paused while dragging inside it).
     if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {

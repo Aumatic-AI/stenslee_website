@@ -9,16 +9,13 @@ export default function Footer() {
           <a href="#top" aria-label="Stenslee home">
             <Logo size="lg" />
           </a>
-          <p className="footer-tag">
-            Win back old customers. <em>Close more new ones.</em>
-          </p>
         </div>
         <nav className="footer-nav" aria-label="Product">
           <p className="footer-head">Product</p>
           <ul>
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How it works</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
           </ul>
         </nav>
         <nav className="footer-nav" aria-label="Account">

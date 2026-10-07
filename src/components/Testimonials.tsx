@@ -1,109 +1,49 @@
-"use client";
+import Image from "next/image";
 
-import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { ChevronLeft, ChevronRight } from "./icons";
+type Testimonial = { quote: string; name: string; image?: string };
 
-// PLACEHOLDER QUOTES -- the brief says the real testimonials (with photos)
-// will be shared later. Replace these before the page goes live.
-const QUOTES = [
-  {
-    lead: "We sent one offer to our old client list.",
-    hit: "Three bookings came back by the next morning.",
-    name: "Studio owner",
-  },
-  {
-    lead: "Customers used to ask what it would look like on them.",
-    hit: "Now they just see it.",
-    name: "Tattoo artist",
-  },
-  {
-    lead: "I set the offer up once and forgot about it.",
-    hit: "It keeps bringing people back.",
-    name: "Studio manager",
-  },
+// PLACEHOLDERS -- the brief says the real testimonials will be shared as
+// pictures. When they arrive, add `image: "/images/testimonials/<file>"` to
+// each entry (the card then shows the picture) and replace the quotes.
+const TESTIMONIALS: Testimonial[] = [
+  { quote: "We sent one offer to our old client list. Three bookings came back by the next morning.", name: "Studio owner" },
+  { quote: "Customers used to ask what it would look like on them. Now they just see it.", name: "Tattoo artist" },
+  { quote: "I set the offer up once and forgot about it. It keeps bringing people back.", name: "Studio manager" },
 ];
 
+// Repeated so the scrolling strip is always wider than the screen; the second
+// half exists only to make the loop seamless.
+const SET = [...TESTIMONIALS, ...TESTIMONIALS];
+const TRACK = [...SET, ...SET];
+
 export default function Testimonials() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [autoplay, setAutoplay] = useState(false);
-  const swipeStart = useRef<number | null>(null);
-
-  useEffect(() => {
-    setAutoplay(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
-
-  const go = (delta: number) => setActive((i) => (i + delta + QUOTES.length) % QUOTES.length);
-
-  const onPointerDown = (e: PointerEvent) => {
-    swipeStart.current = e.clientX;
-  };
-  const onPointerUp = (e: PointerEvent) => {
-    if (swipeStart.current === null) return;
-    const dx = e.clientX - swipeStart.current;
-    swipeStart.current = null;
-    if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1);
-  };
-
   return (
-    <section id="testimonials" className="section tone-sunken divider" aria-roledescription="carousel" aria-label="What studios say">
-      <div
-        className="pq"
-        data-autoplay={autoplay}
-        data-paused={paused}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-      >
-        <div className="pq-mark" aria-hidden="true">
-          &ldquo;
-        </div>
-
-        <div className="pq-stage" onPointerDown={onPointerDown} onPointerUp={onPointerUp} aria-live={paused ? "polite" : "off"}>
-          {QUOTES.map((q, i) => (
-            <figure
-              key={q.name}
-              className={`pq-slide${i === active ? " is-active" : ""}`}
-              aria-hidden={i !== active}
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${QUOTES.length}`}
-            >
-              <blockquote className="pq-quote">
-                {q.lead}
-                <span className="pq-hit">{q.hit}</span>
-              </blockquote>
-              <figcaption className="pq-cite">
-                <span className="pq-name">{q.name}</span>
-                <span className="pq-meta">Sample testimonial</span>
-              </figcaption>
-            </figure>
+    <section id="testimonials" className="proof" aria-label="Testimonials">
+      <div className="proof-marquee">
+        <ul className="proof-track">
+          {TRACK.map((t, i) => (
+            <li className="tcard" key={i} aria-hidden={i >= TESTIMONIALS.length ? true : undefined}>
+              <figure>
+                <div className="tcard-media">
+                  {t.image ? (
+                    <Image src={t.image} alt={`Testimonial from ${t.name}`} fill sizes="300px" />
+                  ) : (
+                    <>
+                      <span className="tcard-mark" aria-hidden="true">
+                        &ldquo;
+                      </span>
+                      <blockquote className="tcard-quote">{t.quote}</blockquote>
+                    </>
+                  )}
+                </div>
+                <figcaption className="tcard-cap">
+                  <span className="tcard-name">{t.name}</span>
+                  <span className="tcard-meta">Sample testimonial</span>
+                </figcaption>
+              </figure>
+            </li>
           ))}
-        </div>
-
-        <div className="pq-controls">
-          <button type="button" className="pq-btn" aria-label="Previous testimonial" onClick={() => go(-1)}>
-            <ChevronLeft />
-          </button>
-          <div className="pq-dots">
-            {QUOTES.map((q, i) => (
-              <button
-                key={q.name}
-                type="button"
-                className="pq-dot"
-                aria-label={`Show testimonial ${i + 1}`}
-                aria-current={i === active}
-                onClick={() => setActive(i)}
-                onAnimationEnd={() => {
-                  if (i === active) go(1);
-                }}
-              />
-            ))}
-          </div>
-          <button type="button" className="pq-btn" aria-label="Next testimonial" onClick={() => go(1)}>
-            <ChevronRight />
-          </button>
-        </div>
+        </ul>
       </div>
     </section>
   );

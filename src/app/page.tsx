@@ -1,28 +1,29 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Testimonials from "@/components/Testimonials";
 import Problem from "@/components/Problem";
-import Bridge from "@/components/Bridge";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
-import Testimonials from "@/components/Testimonials";
+import Stats from "@/components/Stats";
+import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 
-// Sections follow the Notion brief, in its order: hero, problem (with its
-// bridge line), features, onboarding steps, testimonials. Pricing is marked
-// "don't touch" in the brief, so it isn't built.
+// Sections in the Notion brief's order. Pricing is marked "soon" in the brief,
+// so it isn't built yet.
 export default function Home() {
   return (
     <>
       <Nav />
       <main>
         <Hero />
+        <Testimonials />
         <Problem />
-        <Bridge />
         <Features />
         <HowItWorks />
-        <Testimonials />
+        <Stats />
+        <Faq />
         <FinalCta />
       </main>
       <Footer />

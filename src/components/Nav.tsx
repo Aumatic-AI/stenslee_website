@@ -8,7 +8,7 @@ import { LINKS } from "@/lib/site";
 const NAV_LINKS = [
   { href: "#features", label: "Features" },
   { href: "#how-it-works", label: "How it works" },
-  { href: "#testimonials", label: "Testimonials" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 type LenisLike = { stop(): void; start(): void };
