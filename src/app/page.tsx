@@ -1,6 +1,8 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Testimonials from "@/components/Testimonials";
+// Testimonials hidden until the real pictures arrive -- uncomment this import
+// and the <Testimonials /> line below to bring the section back.
+// import Testimonials from "@/components/Testimonials";
 import Problem from "@/components/Problem";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
@@ -18,7 +20,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <Problem />
         <Features />
         <HowItWorks />
