@@ -66,7 +66,7 @@ export default function Nav() {
             Log in
           </a>
           <a className="nav-cta" href={LINKS.getStarted}>
-            Get started
+            Start free
             <span className="nav-cta-circle" aria-hidden="true">
               <ArrowRight />
             </span>
@@ -96,7 +96,7 @@ export default function Nav() {
           Log in
         </a>
         <a className="nav-drawer-cta" href={LINKS.getStarted} onClick={close}>
-          Get started
+          Get started free
           <ArrowRight />
         </a>
       </div>

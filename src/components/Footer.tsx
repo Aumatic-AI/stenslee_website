@@ -22,7 +22,7 @@ export default function Footer() {
           <p className="footer-head">Account</p>
           <ul>
             <li><a href={LINKS.login}>Log in</a></li>
-            <li><a href={LINKS.getStarted}>Get started</a></li>
+            <li><a href={LINKS.getStarted}>Get started free</a></li>
           </ul>
         </nav>
       </div>

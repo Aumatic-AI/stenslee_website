@@ -35,7 +35,7 @@ export default function Stats() {
       </ul>
 
       <div className="kpi-cta">
-        <Button href={LINKS.getStarted}>Get started</Button>
+        <Button href={LINKS.getStarted}>Get started free</Button>
         <p className="fine">
           <span>No credit card required</span>
           <span className="fine-sep" aria-hidden="true" />

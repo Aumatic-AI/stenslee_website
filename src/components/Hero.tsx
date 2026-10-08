@@ -32,7 +32,7 @@ export default function Hero() {
             realistic tattoo preview on the customer&apos;s skin in seconds.
           </p>
           <div className="hero-cta">
-            <Button href={LINKS.getStarted}>Get started</Button>
+            <Button href={LINKS.getStarted}>Get started free</Button>
             <Button href={LINKS.demo} variant="ghost">
               Watch demo
             </Button>

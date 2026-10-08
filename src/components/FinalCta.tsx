@@ -13,7 +13,7 @@ export default function FinalCta() {
         </h2>
         <p className="cta-sub">Win back your old clients and close new ones faster.</p>
         <div className="cta-buttons">
-          <Button href={LINKS.getStarted}>Get started</Button>
+          <Button href={LINKS.getStarted}>Get started free</Button>
         </div>
         <p className="fine cta-fine">
           <span>No credit card required</span>
