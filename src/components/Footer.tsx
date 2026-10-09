@@ -1,21 +1,24 @@
+import Link from "next/link";
 import Logo from "./Logo";
+import SectionLink from "./SectionLink";
 import { LINKS } from "@/lib/site";
 
-export default function Footer() {
+// linkBase "/" points the section links back to the home page from other pages.
+export default function Footer({ linkBase = "" }: { linkBase?: string }) {
   return (
     <footer className="footer">
       <div className="footer-top">
         <div className="footer-brand">
-          <a href="#top" aria-label="Stenslee home">
+          <SectionLink base={linkBase} href={linkBase ? "" : "#top"} aria-label="Stenslee home">
             <Logo size="lg" />
-          </a>
+          </SectionLink>
         </div>
         <nav className="footer-nav" aria-label="Product">
           <p className="footer-head">Product</p>
           <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How it works</a></li>
-            <li><a href="#faq">FAQ</a></li>
+            <li><SectionLink base={linkBase} href="#features">Features</SectionLink></li>
+            <li><SectionLink base={linkBase} href="#how-it-works">How it works</SectionLink></li>
+            <li><SectionLink base={linkBase} href="#faq">FAQ</SectionLink></li>
           </ul>
         </nav>
         <nav className="footer-nav" aria-label="Account">
@@ -23,6 +26,13 @@ export default function Footer() {
           <ul>
             <li><a href={LINKS.login}>Log in</a></li>
             <li><a href={LINKS.getStarted}>Get started free</a></li>
+          </ul>
+        </nav>
+        <nav className="footer-nav" aria-label="Legal">
+          <p className="footer-head">Legal</p>
+          <ul>
+            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link href="/terms">Terms of Service</Link></li>
           </ul>
         </nav>
       </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
+import SectionLink from "./SectionLink";
 import { ArrowRight } from "./icons";
 import { LINKS } from "@/lib/site";
 
@@ -13,7 +14,8 @@ const NAV_LINKS = [
 
 type LenisLike = { stop(): void; start(): void };
 
-export default function Nav() {
+// linkBase "/" points the section links back to the home page from other pages.
+export default function Nav({ linkBase = "" }: { linkBase?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -45,17 +47,17 @@ export default function Nav() {
   return (
     <header className={`nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="nav-inner">
-        <a href="#top" aria-label="Stenslee home" onClick={close}>
+        <SectionLink base={linkBase} href={linkBase ? "" : "#top"} aria-label="Stenslee home" onClick={close}>
           <Logo />
-        </a>
+        </SectionLink>
 
         <nav className="nav-main" aria-label="Main">
           <ul className="nav-links">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a className="nav-link" href={link.href}>
+                <SectionLink className="nav-link" base={linkBase} href={link.href}>
                   {link.label}
-                </a>
+                </SectionLink>
               </li>
             ))}
           </ul>
@@ -88,9 +90,9 @@ export default function Nav() {
 
       <div id="nav-drawer" className="nav-drawer" data-open={open} inert={!open} data-lenis-prevent>
         {NAV_LINKS.map((link) => (
-          <a key={link.href} className="nav-drawer-link" href={link.href} onClick={close}>
+          <SectionLink key={link.href} className="nav-drawer-link" base={linkBase} href={link.href} onClick={close}>
             {link.label}
-          </a>
+          </SectionLink>
         ))}
         <a className="nav-drawer-login" href={LINKS.login}>
           Log in

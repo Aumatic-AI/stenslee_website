@@ -1,7 +1,7 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://stenslee.app";
 
 // The studio dashboard the Get started / Log in buttons lead to.
-const DASHBOARD_URL =
+export const DASHBOARD_URL =
   process.env.NEXT_PUBLIC_DASHBOARD_URL ??
   (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://dashboard.stenslee.com");
 
